@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutterfly/flutterfly.dart';
+import 'package:flutterfly_example/details_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -53,10 +54,10 @@ class _HomePageState extends State<HomePage> {
         title: item.name,
         price: item.price,
         onTap: () {
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) => StoreDetails(model: item)),
-          // );
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => DetailsPage(model: item)),
+          );
         },
       ));
     }
