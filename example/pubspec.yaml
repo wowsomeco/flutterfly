@@ -1,0 +1,28 @@
+name: flutterfly_example
+description: Demonstrates how to use the flutterfly plugin.
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.2.2 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter  
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutterfly:
+    path: ../
+
+flutter:
+
+  uses-material-design: true
+
+  fonts:
+    - family: JosefinSans
+      fonts:
+        - asset: fonts/JosefinSans-Regular.ttf
+        - asset: fonts/JosefinSans-SemiBold.ttf
+          weight: 700

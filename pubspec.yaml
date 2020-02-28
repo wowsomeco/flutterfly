@@ -1,0 +1,22 @@
+name: flutterfly
+description: Collection of Lightweight Material UI components.
+version: 0.0.1
+author: Wowsome <dev@wowsome.co>
+homepage:
+
+environment:
+  sdk: ">=2.2.2 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  intl: ^0.15.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  plugin:
+    androidPackage: com.example.flutterfly
+    pluginClass: FlutterflyPlugin

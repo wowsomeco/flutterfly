@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/flutterfly.iml" filepath="$PROJECT_DIR$/flutterfly.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/flutterfly_android.iml" filepath="$PROJECT_DIR$/android/flutterfly_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/example/android/flutterfly_example_android.iml" filepath="$PROJECT_DIR$/example/android/flutterfly_example_android.iml" />
+    </modules>
+  </component>
+</project>
