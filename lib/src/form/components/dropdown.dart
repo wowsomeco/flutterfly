@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class DropdownFormField<T, U> extends StatefulWidget {
+class FlyDropdown<T, U> extends StatefulWidget {
   final String label;
   final T initialValue;
   final bool autovalidate;
@@ -10,7 +10,7 @@ class DropdownFormField<T, U> extends StatefulWidget {
   final String Function(U) optionKey;
   final Future<List<U>> Function() options;
 
-  DropdownFormField(
+  FlyDropdown(
       {Key key,
       this.initialValue,
       this.autovalidate = false,
@@ -24,11 +24,10 @@ class DropdownFormField<T, U> extends StatefulWidget {
         );
 
   @override
-  _DropdownFormFieldState<T, U> createState() =>
-      _DropdownFormFieldState<T, U>();
+  _FlyDropdownState<T, U> createState() => _FlyDropdownState<T, U>();
 }
 
-class _DropdownFormFieldState<T, U> extends State<DropdownFormField<T, U>> {
+class _FlyDropdownState<T, U> extends State<FlyDropdown<T, U>> {
   List<U> _options;
   U _selected;
   bool _loading = false;

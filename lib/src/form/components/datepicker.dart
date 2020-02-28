@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
-class DatepickerFormField extends StatefulWidget {
+class FlyDatepicker extends StatefulWidget {
   final String initialValue;
   final FormFieldValidator<String> validator;
   final InputDecoration decoration;
@@ -13,7 +13,7 @@ class DatepickerFormField extends StatefulWidget {
   final String labelFormat;
   final String valueFormat;
 
-  DatepickerFormField(
+  FlyDatepicker(
       {Key key,
       this.initialValue,
       this.autovalidate = false,
@@ -27,10 +27,10 @@ class DatepickerFormField extends StatefulWidget {
       : super(key: key);
 
   @override
-  _DatepickerFormFieldState createState() => _DatepickerFormFieldState();
+  _FlyDatepickerState createState() => _FlyDatepickerState();
 }
 
-class _DatepickerFormFieldState extends State<DatepickerFormField> {
+class _FlyDatepickerState extends State<FlyDatepicker> {
   TextEditingController _controller;
 
   @override

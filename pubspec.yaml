@@ -1,8 +1,6 @@
 name: flutterfly
-description: Collection of Lightweight Material UI components.
+description: Collection of Flyweight Material UI components.
 version: 0.0.1
-author: Wowsome <dev@wowsome.co>
-homepage:
 
 environment:
   sdk: ">=2.2.2 <3.0.0"

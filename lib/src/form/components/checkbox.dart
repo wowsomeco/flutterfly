@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class CheckboxFormField extends FormField<bool> {
+class FlyCheckbox extends FormField<bool> {
   final String label;
   final void Function(bool v) onChanged;
 
-  CheckboxFormField({
+  FlyCheckbox({
     Key key,
     bool initialValue,
     bool autovalidate = false,

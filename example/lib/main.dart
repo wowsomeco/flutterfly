@@ -55,7 +55,7 @@ class _AppState extends State<TestApp> {
   }
 
   Widget _buildForm() {
-    return FormBuilder<FormModel>(
+    return FlyForm<FormModel>(
       model: widget.model,
       builder: (context, controller, model) {
         Widget formFields = Column(
@@ -78,14 +78,14 @@ class _AppState extends State<TestApp> {
                 key: Key(FieldString),
                 decoration: InputDecoration(labelText: FieldString),
                 initialValue: model.testString,
-                validator: FormValidators.required(),
+                validator: FlyFormValidator.required(),
                 onChanged: (value) {
                   controller.onChanged(() {
                     model.testString = value;
                   });
                 }),
             gutter,
-            CheckboxFormField(
+            FlyCheckbox(
               key: Key(FieldCheckbox),
               label: FieldCheckbox,
               tristate: true,
@@ -95,10 +95,10 @@ class _AppState extends State<TestApp> {
                   model.testBool = v;
                 });
               },
-              validator: FormValidators.required(),
+              validator: FlyFormValidator.required(),
             ),
             gutter,
-            DatepickerFormField(
+            FlyDatepicker(
               key: Key(FieldDatepicker),
               decoration: InputDecoration(labelText: FieldDatepicker),
               initialValue: model.testDate,
@@ -109,12 +109,12 @@ class _AppState extends State<TestApp> {
                   model.testDate = v;
                 });
               },
-              validator: FormValidators.required(),
+              validator: FlyFormValidator.required(),
             ),
             gutter,
-            DropdownFormField<String, String>(
+            FlyDropdown<String, String>(
                 label: FieldDropdownString,
-                validator: FormValidators.required(),
+                validator: FlyFormValidator.required(),
                 initialValue: model.testDropdownString,
                 onChanged: (v) {
                   controller.onChanged(() {
@@ -125,9 +125,9 @@ class _AppState extends State<TestApp> {
                 optionKey: (v) => v,
                 options: () async => <String>['Test 1', 'Test 2']),
             gutter,
-            DropdownFormField<int, DropdownModel>(
+            FlyDropdown<int, DropdownModel>(
               label: FieldDropdownInt,
-              validator: FormValidators.required(),
+              validator: FlyFormValidator.required(),
               initialValue: model.testDropdownInt,
               onChanged: (v) {
                 controller.onChanged(() {

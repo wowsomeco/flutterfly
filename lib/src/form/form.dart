@@ -1,31 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-abstract class FormController {
+abstract class FlyFormController {
   void onChanged(VoidCallback callback);
   bool validate();
   void save();
 }
 
-class FormBuilder<T> extends StatefulWidget {
+class FlyForm<T> extends StatefulWidget {
   final T model;
   final bool autovalidate;
   final Widget Function(
-      BuildContext context, FormController controller, T model) builder;
+      BuildContext context, FlyFormController controller, T model) builder;
 
-  FormBuilder(
+  FlyForm(
       {@required this.builder,
       @required this.model,
       this.autovalidate = false});
 
   @override
-  FormBuilderState<T> createState() {
-    return FormBuilderState<T>();
+  FlyFormState<T> createState() {
+    return FlyFormState<T>();
   }
 }
 
-class FormBuilderState<T> extends State<FormBuilder<T>>
-    implements FormController {
+class FlyFormState<T> extends State<FlyForm<T>> implements FlyFormController {
   final _formKey = GlobalKey<FormState>();
   T _model;
 

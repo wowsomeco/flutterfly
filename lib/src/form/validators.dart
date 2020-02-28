@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-class FormValidators {
+class FlyFormValidator {
   static FormFieldValidator required({String errText = 'Required'}) {
     return (v) {
       if (v == null ||
