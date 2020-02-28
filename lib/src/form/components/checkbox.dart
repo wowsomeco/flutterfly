@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import '_input_decorator.dart';
 
+/// Shows an Input Field with a [Checkbox] in it
 class FlyCheckbox extends FormField<bool> {
   final String label;
   final void Function(bool v) onChanged;
@@ -19,21 +21,17 @@ class FlyCheckbox extends FormField<bool> {
             autovalidate: autovalidate,
             validator: validator,
             builder: (FormFieldState<bool> state) {
-              final InputDecoration effectiveDecoration = InputDecoration()
-                  .applyDefaults(Theme.of(state.context).inputDecorationTheme)
-                  .copyWith(
-                      errorText: state.errorText,
-                      prefixText: label,
-                      suffixIcon: Checkbox(
-                        tristate: tristate,
-                        value: initialValue,
-                        onChanged: (v) {
-                          state.didChange(v);
-                          onChanged(v);
-                        },
-                      ));
               return InputDecorator(
-                decoration: effectiveDecoration,
+                decoration: flyInputDecorWithError(state).copyWith(
+                    prefixText: label,
+                    suffixIcon: Checkbox(
+                      tristate: tristate,
+                      value: initialValue,
+                      onChanged: (v) {
+                        state.didChange(v);
+                        onChanged(v);
+                      },
+                    )),
               );
             });
 }

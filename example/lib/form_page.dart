@@ -84,7 +84,7 @@ class _FormPageState extends State<FormPage> {
             gutter,
             FlyDatepicker(
               key: Key(FieldDatepicker),
-              decoration: InputDecoration(labelText: FieldDatepicker),
+              label: FieldDatepicker,
               initialValue: model.testDate,
               onChanged: (v) {
                 controller.onChanged(() {
@@ -102,7 +102,6 @@ class _FormPageState extends State<FormPage> {
                   controller.onChanged(() {
                     model.testDropdownString = v;
                   });
-                  return v;
                 },
                 optionKey: (v) => v,
                 optionValue: (v) => v,
@@ -116,11 +115,11 @@ class _FormPageState extends State<FormPage> {
                 controller.onChanged(() {
                   model.testDropdownInt = v.id;
                 });
-                return model.testDropdownInt;
               },
               optionValue: (v) => v?.name,
               optionKey: (v) => v?.id,
               options: () async {
+                // here we're trying to mimic the delay of fetching the data from the server
                 await Future.delayed(Duration(seconds: 1));
                 return _buildDropdownModelOptions();
               },

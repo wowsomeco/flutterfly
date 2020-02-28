@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 export 'src/form/index.dart';
 export 'src/ui/components/index.dart';
 
-final ThemeData Function() flutterflyThemeData = () {
+final ThemeData Function() flyThemeData = () {
   Color primaryColor = Color.fromARGB(255, 36, 123, 160);
   Color errorColor = Color.fromARGB(255, 235, 84, 124);
   Color accentColor = Color.fromARGB(255, 112, 193, 179);
   Color enabledBorderColor = Color.fromARGB(255, 235, 235, 235);
   TextStyle labelStyle = TextStyle(
-      fontSize: 15,
+      fontSize: 16,
       color: Color.fromARGB(255, 134, 134, 134),
       fontWeight: FontWeight.bold);
   BorderSide inputBorder = BorderSide(width: 1.5);

@@ -1,19 +1,67 @@
 import 'package:flutter/material.dart';
+import '_input_decorator.dart';
 
 /// A Dropdown Form Component
 ///
 /// This widget takes a generic [initialValue]
 /// where the options can be the same type as the [initialValue]
 /// or can also differ where it could be used to
-/// build a List of class based dropdown model
+/// build a List of class-based dropdown model
+///
+/// ### Example for a common Dropdown where it has same type for both T and U
+/// ```
+/// FlyDropdown<String, String>(
+/// label: FieldDropdownString,
+/// validator: FlyFormValidator.required(),
+/// initialValue: model.testDropdownString,
+/// onChanged: (v) {
+/// controller.onChanged(() {
+/// model.testDropdownString = v;
+/// });
+/// },
+/// optionKey: (v) => v,
+/// optionValue: (v) => v,
+/// options: () async => <String>['Test 1', 'Test 2'])
+/// ```
+///
+/// ### Example for a Dropdown that has int as the model and a List of class
+/// ```
+/// FlyDropdown<int, TestDropdownModel>(
+/// label: FieldDropdownInt,
+/// validator: FlyFormValidator.required(),
+/// initialValue: model.testDropdownInt,
+/// onChanged: (v) {
+/// controller.onChanged(() {
+/// model.testDropdownInt = v.id;
+/// });
+/// },
+/// optionValue: (v) => v?.name,
+/// optionKey: (v) => v?.id,
+/// options: () async {
+/// await Future.delayed(Duration(seconds: 1));
+/// return _buildDropdownModelOptions();
+/// },
+/// )
+/// ```
 class FlyDropdown<T, U> extends StatefulWidget {
   final String label;
   final T initialValue;
   final bool autovalidate;
   final FormFieldValidator<T> validator;
-  final T Function(U) onChanged;
+  final void Function(U) onChanged;
+
+  /// the key of the dropdown
   final T Function(U) optionKey;
+
+  /// the callback that sends the Option model and gived String in return
+  /// to show it in the input field
   final String Function(U) optionValue;
+
+  /// the callback for the dropdown items.
+  /// it is defined as a [Future] to accomodate for
+  /// the cases where we need to fetch the array from the server
+  /// before showing them to the user
+  /// this widget automagically shows the [CircularLoading]
   final Future<List<U>> Function() options;
 
   FlyDropdown(
@@ -77,24 +125,20 @@ class _FlyDropdownState<T, U> extends State<FlyDropdown<T, U>> {
       initialValue: widget.initialValue,
       validator: widget.validator,
       builder: (FormFieldState<T> state) {
-        final InputDecoration effectiveDecoration = InputDecoration()
-            .applyDefaults(Theme.of(context).inputDecorationTheme)
-            .copyWith(
-                errorText: state.errorText,
-                labelText: widget.label,
-                prefixText: widget.optionValue(_selected),
-                suffix: _loading == true ? _buildLoading() : null,
-                suffixIcon: Icon(
-                  Icons.arrow_drop_down,
-                  size: 24,
-                ));
         return InkWell(
             onTap: () {
               // only show the option dialog when the options have been loaded successfully
               if (!_loading) showOptions(context, state);
             },
             child: InputDecorator(
-              decoration: effectiveDecoration,
+              decoration: flyInputDecorWithError(state).copyWith(
+                  labelText: widget.label,
+                  prefixText: widget.optionValue(_selected),
+                  suffix: _loading == true ? _buildLoading() : null,
+                  suffixIcon: Icon(
+                    Icons.arrow_drop_down,
+                    size: 24,
+                  )),
             ));
       },
     );
@@ -117,7 +161,8 @@ class _FlyDropdownState<T, U> extends State<FlyDropdown<T, U>> {
                         child: Column(
                           children: _buildOptions(context, (selected) {
                             _selected = selected;
-                            state.didChange(widget.onChanged(selected));
+                            widget.onChanged(selected);
+                            state.didChange(widget.optionKey(_selected));
                           }),
                         ),
                       ),

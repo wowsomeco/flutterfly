@@ -29,7 +29,7 @@ class _FlyAppState extends State<FlyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Form Test',
-        theme: flutterflyThemeData(),
+        theme: flyThemeData(),
         home: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.white,
