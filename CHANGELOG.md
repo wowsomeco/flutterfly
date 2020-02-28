@@ -6,3 +6,10 @@ Initial Version of the library.
     * Includes Form Checkbox Component
     * Includes Form Datepicker Component
     * Includes Form Dropdown Component 
+
+## 0.0.2
+
+Added more UI Components
+    
+    * Badge Component
+    * Image Component

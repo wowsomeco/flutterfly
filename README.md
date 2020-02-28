@@ -2,12 +2,16 @@
 
 A collection of Flyweight Material UI components.
 
-** Current Available UI Components **
+## Contents
 
-- Form Builder
-- Checkbox Form Field
-- Datepicker Form Field
-- Dropdown Form Field
+- Form Components
+    - Checkbox
+    - Datepicker
+    - Dropdown
+
+- UI Components
+    - Badge
+    - URL Image
 
 ## Documentation
 

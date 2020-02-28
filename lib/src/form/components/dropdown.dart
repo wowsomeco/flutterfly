@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
+/// A Dropdown Form Component
+///
+/// This widget takes a generic [initialValue]
+/// where the options can be the same type as the [initialValue]
+/// or can also differ where it could be used to
+/// build a List of class based dropdown model
 class FlyDropdown<T, U> extends StatefulWidget {
   final String label;
   final T initialValue;
   final bool autovalidate;
   final FormFieldValidator<T> validator;
   final T Function(U) onChanged;
-  final String Function(U) optionKey;
+  final T Function(U) optionKey;
+  final String Function(U) optionValue;
   final Future<List<U>> Function() options;
 
   FlyDropdown(
@@ -16,6 +22,7 @@ class FlyDropdown<T, U> extends StatefulWidget {
       this.autovalidate = false,
       this.validator,
       @required this.label,
+      @required this.optionValue,
       @required this.onChanged,
       @required this.optionKey,
       @required this.options})
@@ -27,10 +34,42 @@ class FlyDropdown<T, U> extends StatefulWidget {
   _FlyDropdownState<T, U> createState() => _FlyDropdownState<T, U>();
 }
 
+/// The current state of the [FlyDropdown]
 class _FlyDropdownState<T, U> extends State<FlyDropdown<T, U>> {
-  List<U> _options;
+  Map<T, U> _options = {};
   U _selected;
   bool _loading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // fetch the select options on init
+    fetchOptions();
+  }
+
+  void fetchOptions() async {
+    // set loading, just in case the options need to be fetched from a server
+    setState(() {
+      _loading = true;
+    });
+    // map the options to <T,U> accordingly
+    List<U> options = await widget.options();
+    for (int i = 0; i < options.length; i++) {
+      U u = options[i];
+      T k = widget.optionKey(u);
+      _options[k] = u;
+      // check against the initial value
+      if (widget.initialValue == k) {
+        _selected = u;
+      }
+    }
+    // loading = false on done fetching
+    if (mounted) {
+      setState(() {
+        _loading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +82,17 @@ class _FlyDropdownState<T, U> extends State<FlyDropdown<T, U>> {
             .copyWith(
                 errorText: state.errorText,
                 labelText: widget.label,
-                prefixText: widget.optionKey(_selected),
+                prefixText: widget.optionValue(_selected),
                 suffix: _loading == true ? _buildLoading() : null,
                 suffixIcon: Icon(
                   Icons.arrow_drop_down,
                   size: 24,
                 ));
         return InkWell(
-            onTap: () => showOptions(context, state),
+            onTap: () {
+              // only show the option dialog when the options have been loaded successfully
+              if (!_loading) showOptions(context, state);
+            },
             child: InputDecorator(
               decoration: effectiveDecoration,
             ));
@@ -60,30 +102,12 @@ class _FlyDropdownState<T, U> extends State<FlyDropdown<T, U>> {
 
   Future<void> showOptions(
       BuildContext context, FormFieldState<T> state) async {
-    // grab the options
-    if (_options == null) {
-      // set loading, just in case the options need to be fetched from a server
-      setState(() {
-        _loading = true;
-      });
-      // set the options
-      _options = await widget.options();
-      // loading = false on done fetching
-      if (mounted) {
-        setState(() {
-          _loading = false;
-        });
-      }
-    }
     // set focus
     FocusScope.of(context).requestFocus(FocusNode());
     await showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
           return StatefulBuilder(builder: (context, setter) {
-            if (_options == null) {
-              return _buildLoading();
-            }
             return Padding(
                 padding: EdgeInsets.all(10),
                 child: Column(
@@ -107,38 +131,36 @@ class _FlyDropdownState<T, U> extends State<FlyDropdown<T, U>> {
   List<Widget> _buildOptions(BuildContext context, Function(U) selected) {
     List<Widget> widgets = [];
     ThemeData theme = Theme.of(context);
-    for (int i = 0; i < _options.length; i++) {
-      widgets.add(
-        InkWell(
-          onTap: () {
-            selected(_options[i]);
-            Navigator.pop(context);
-          },
-          child: Container(
-              child: Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Column(
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            widget.optionKey(_options[i]),
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          if (_selected == _options[i])
-                            Icon(
-                              Icons.check,
-                              color: theme.accentColor,
-                            )
-                        ],
-                      ),
-                      Divider(),
-                    ],
-                  ))),
-        ),
-      );
-    }
+    _options.forEach((k, v) {
+      widgets.add(InkWell(
+        onTap: () {
+          selected(v);
+          Navigator.pop(context);
+        },
+        child: Container(
+            child: Padding(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          widget.optionValue(v),
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        if (_selected == v)
+                          Icon(
+                            Icons.check,
+                            color: theme.accentColor,
+                          )
+                      ],
+                    ),
+                    Divider(),
+                  ],
+                ))),
+      ));
+    });
     return widgets;
   }
 

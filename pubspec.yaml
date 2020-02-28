@@ -1,6 +1,6 @@
 name: flutterfly
 description: A collection of Flyweight Material UI components that will save your development costs drastically.
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/wowsomeco/flutterfly
 
 environment:
@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  intl: ^0.15.8
+  intl: ^0.16.1
 
 dev_dependencies:
   flutter_test:

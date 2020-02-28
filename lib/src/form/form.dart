@@ -7,6 +7,9 @@ abstract class FlyFormController {
   void save();
 }
 
+/// A wrapper for Flutter Material [Form]
+/// The [model] can be anything
+///
 class FlyForm<T> extends StatefulWidget {
   final T model;
   final bool autovalidate;

@@ -15,16 +15,18 @@ class FlyDatepicker extends StatefulWidget {
 
   FlyDatepicker(
       {Key key,
+      @required this.onChanged,
       this.initialValue,
       this.autovalidate = false,
       this.validator,
       this.decoration = const InputDecoration(),
       this.labelFormat = 'dd MMM yyyy',
       this.valueFormat = 'yyyy-MM-dd',
-      @required this.onChanged,
-      @required this.firstDate,
-      @required this.lastDate})
-      : super(key: key);
+      DateTime firstDate,
+      DateTime lastDate})
+      : firstDate = firstDate ?? DateTime(1920),
+        lastDate = lastDate ?? DateTime.now().add(Duration(days: 1)),
+        super(key: key);
 
   @override
   _FlyDatepickerState createState() => _FlyDatepickerState();
@@ -36,7 +38,11 @@ class _FlyDatepickerState extends State<FlyDatepicker> {
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController(text: widget.initialValue);
+    _controller = TextEditingController();
+    if (widget.initialValue != null) {
+      _controller.text = DateFormat(widget.labelFormat)
+          .format(DateTime.parse(widget.initialValue));
+    }
   }
 
   @override

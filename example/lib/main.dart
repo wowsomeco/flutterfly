@@ -1,160 +1,73 @@
 import 'package:flutter/material.dart';
 import 'package:flutterfly/flutterfly.dart';
+import 'package:flutterfly_example/home_page.dart';
+import 'form_page.dart';
 
-final Widget gutter = Padding(
-  padding: EdgeInsets.all(5),
-);
-
-void main() => runApp(TestApp(
-      model: FormModel(),
+void main() => runApp(FlyApp(
+      model: TestFormModel(),
     ));
 
-const String FieldString = 'Field String';
-const String FieldCheckbox = 'Field Checkbox';
-const String FieldDatepicker = 'Field Datepicker';
-const String FieldDropdownString = 'Field Dropdown String';
-const String FieldDropdownInt = 'Field Dropdown Int';
+class FlyApp extends StatefulWidget {
+  final TestFormModel model;
 
-class DropdownModel {
-  int id;
-  String name;
-
-  DropdownModel({this.id, this.name});
-}
-
-class FormModel {
-  int id;
-  String testString;
-  String testDate;
-  bool testBool;
-  String testDropdownString;
-  int testDropdownInt;
-}
-
-class TestApp extends StatefulWidget {
-  final FormModel model;
-
-  TestApp({@required this.model});
+  FlyApp({@required this.model});
 
   @override
-  _AppState createState() => _AppState();
+  _FlyAppState createState() => _FlyAppState();
 }
 
-class _AppState extends State<TestApp> {
+class _FlyAppState extends State<FlyApp> {
+  int _curIndex = 0;
+  final List<Widget> _pages = [
+    HomePage(),
+    FormPage(
+      model: TestFormModel(),
+    )
+  ];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Form Test',
         theme: flutterflyThemeData(),
         home: Scaffold(
-            appBar: AppBar(),
-            body: Padding(
-              child: _buildForm(),
-              padding: EdgeInsets.all(15),
-            )));
-  }
-
-  Widget _buildForm() {
-    return FlyForm<FormModel>(
-      model: widget.model,
-      builder: (context, controller, model) {
-        Widget formFields = Column(
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                FlatButton.icon(
-                  icon: Icon(Icons.check),
-                  color: Theme.of(context).primaryColor,
-                  onPressed: () => controller.validate(),
-                  label: Text(
-                    'Validate',
-                  ),
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            actions: [
+              FlyBadge(
+                icon: Icon(
+                  Icons.notifications,
+                  size: 32,
+                  color: Colors.black87,
                 ),
-              ],
-            ),
-            gutter,
-            TextFormField(
-                key: Key(FieldString),
-                decoration: InputDecoration(labelText: FieldString),
-                initialValue: model.testString,
-                validator: FlyFormValidator.required(),
-                onChanged: (value) {
-                  controller.onChanged(() {
-                    model.testString = value;
-                  });
-                }),
-            gutter,
-            FlyCheckbox(
-              key: Key(FieldCheckbox),
-              label: FieldCheckbox,
-              tristate: true,
-              initialValue: model.testBool,
-              onChanged: (v) {
-                controller.onChanged(() {
-                  model.testBool = v;
-                });
-              },
-              validator: FlyFormValidator.required(),
-            ),
-            gutter,
-            FlyDatepicker(
-              key: Key(FieldDatepicker),
-              decoration: InputDecoration(labelText: FieldDatepicker),
-              initialValue: model.testDate,
-              firstDate: DateTime(1900),
-              lastDate: DateTime.now().add(Duration(days: 1)),
-              onChanged: (v) {
-                controller.onChanged(() {
-                  model.testDate = v;
-                });
-              },
-              validator: FlyFormValidator.required(),
-            ),
-            gutter,
-            FlyDropdown<String, String>(
-                label: FieldDropdownString,
-                validator: FlyFormValidator.required(),
-                initialValue: model.testDropdownString,
-                onChanged: (v) {
-                  controller.onChanged(() {
-                    model.testDropdownString = v;
-                  });
-                  return v;
-                },
-                optionKey: (v) => v,
-                options: () async => <String>['Test 1', 'Test 2']),
-            gutter,
-            FlyDropdown<int, DropdownModel>(
-              label: FieldDropdownInt,
-              validator: FlyFormValidator.required(),
-              initialValue: model.testDropdownInt,
-              onChanged: (v) {
-                controller.onChanged(() {
-                  model.testDropdownInt = v.id;
-                });
-                return model.testDropdownInt;
-              },
-              optionKey: (v) => v?.name,
-              options: () async {
-                await Future.delayed(Duration(seconds: 1));
-                return _buildDropdownModelOptions();
-              },
-            )
-          ],
-        );
-        return SingleChildScrollView(
-          child: formFields,
-        );
-      },
-    );
-  }
-
-  List<DropdownModel> _buildDropdownModelOptions() {
-    List<DropdownModel> options = [];
-    for (int i = 0; i < 15; i++) {
-      options.add(DropdownModel(id: i + 1, name: 'Test Name ${i + 1}'));
-    }
-    return options;
+                badgeContent: '3',
+                onPressed: () {},
+              ),
+              FlyBadge(
+                icon: Icon(
+                  Icons.notifications,
+                  size: 32,
+                  color: Colors.black87,
+                ),
+                onPressed: () {},
+              ),
+            ],
+          ),
+          body: _pages[_curIndex],
+          bottomNavigationBar: BottomNavigationBar(
+            onTap: (idx) {
+              setState(() {
+                _curIndex = idx;
+              });
+            },
+            currentIndex: _curIndex,
+            items: [
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.home), title: Text('Home')),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.person), title: Text('Profile'))
+            ],
+          ),
+        ));
   }
 }

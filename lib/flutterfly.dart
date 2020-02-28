@@ -3,6 +3,7 @@ library flutterfly;
 import 'package:flutter/material.dart';
 
 export 'src/form/index.dart';
+export 'src/ui/components/index.dart';
 
 final ThemeData Function() flutterflyThemeData = () {
   Color primaryColor = Color.fromARGB(255, 36, 123, 160);
