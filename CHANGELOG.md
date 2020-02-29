@@ -13,3 +13,9 @@ Added more UI Components
     
     * Badge Component
     * Image Component
+
+## 0.0.2+1
+
+Added more UI Components
+    
+    * Button Component    

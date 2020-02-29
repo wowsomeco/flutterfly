@@ -47,13 +47,10 @@ class _FormPageState extends State<FormPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                FlatButton.icon(
-                  icon: Icon(Icons.check),
-                  color: Theme.of(context).primaryColor,
+                FlyButton(
+                  icon: Icons.check,
                   onPressed: () => controller.validate(),
-                  label: Text(
-                    'Validate',
-                  ),
+                  label: 'Validate',
                 ),
               ],
             ),
