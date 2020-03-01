@@ -24,10 +24,17 @@ import '_input_decorator.dart';
 /// options: () async => <String>['Test 1', 'Test 2'])
 /// ```
 ///
-/// ### Example for a Dropdown that has int as the model and a List of class
+/// ### Example for a Dropdown that has [int] as the model and [List] of any class.
+/// This scenario normally happens when you wanted to select only the id of the class
 /// ```
+/// class TestDropdownModel {
+/// int id;
+/// String name;
+/// TestDropdownModel({this.id, this.name});
+/// }
+///
 /// FlyDropdown<int, TestDropdownModel>(
-/// label: FieldDropdownInt,
+/// label: 'Select Province',
 /// validator: FlyFormValidator.required(),
 /// initialValue: model.testDropdownInt,
 /// onChanged: (v) {
@@ -100,19 +107,19 @@ class _FlyDropdownState<T, U> extends State<FlyDropdown<T, U>> {
     setState(() {
       _loading = true;
     });
-    // map the options to <T,U> accordingly
+    // fetching the options ...
     List<U> options = await widget.options();
-    for (int i = 0; i < options.length; i++) {
-      U u = options[i];
-      T k = widget.optionKey(u);
-      _options[k] = u;
-      // check against the initial value
-      if (widget.initialValue == k) {
-        _selected = u;
-      }
-    }
-    // loading = false on done fetching
+    // map the options to <T,U> accordingly
     if (mounted) {
+      for (int i = 0; i < options.length; i++) {
+        U u = options[i];
+        T k = widget.optionKey(u);
+        _options[k] = u;
+        // check against the initial value
+        if (widget.initialValue == k) {
+          _selected = u;
+        }
+      }
       setState(() {
         _loading = false;
       });

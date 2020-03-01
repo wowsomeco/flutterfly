@@ -18,4 +18,12 @@ Added more UI Components
 
 Added more UI Components
     
-    * Button Component    
+    * Button Component
+
+## 0.0.2+1
+
+* Added Card Component
+* More Docs
+* More Example Pages
+    
+        

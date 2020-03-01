@@ -21,6 +21,11 @@ final ThemeData Function() flyThemeData = () {
       primaryColor: primaryColor,
       accentColor: accentColor,
       errorColor: errorColor,
+      cardTheme: CardTheme(
+          elevation: 0,
+          shape: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(0)),
+              borderSide: BorderSide(color: enabledBorderColor))),
       buttonTheme: ButtonThemeData(
           buttonColor: primaryColor,
           textTheme: ButtonTextTheme.primary,

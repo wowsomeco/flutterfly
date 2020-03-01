@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutterfly/flutterfly.dart';
-import 'package:flutterfly_example/details_page.dart';
+import 'details_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -102,36 +102,33 @@ class _ThumbnailStoreState extends State<ThumbnailStore> {
   Widget build(BuildContext context) {
     return InkWell(
         onTap: widget.onTap,
-        child: Card(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                  padding: EdgeInsets.all(10),
-                  height: 60,
-                  child: Text(
-                    widget.title,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16),
-                  )),
-              FlyImage(
-                url: widget.imgUrl,
-                aspectRatio: widget.imgAspectRatio,
-              ),
-              Expanded(
-                  child: Container(
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.all(5),
-                      child: Text(
-                        '${widget.price} USD',
-                        textAlign: TextAlign.justify,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 14),
-                      )))
-            ],
-          ),
+        child: FlyCard(
+          children: [
+            Container(
+                padding: EdgeInsets.all(10),
+                height: 60,
+                child: Text(
+                  widget.title,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 16),
+                )),
+            FlyImage(
+              url: widget.imgUrl,
+              aspectRatio: widget.imgAspectRatio,
+            ),
+            Expanded(
+                child: Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.all(5),
+                    child: Text(
+                      '${widget.price} USD',
+                      textAlign: TextAlign.justify,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                    )))
+          ],
         ));
   }
 }

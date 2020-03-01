@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterfly/flutterfly.dart';
 import 'home_page.dart';
+import 'shopping_cart_page.dart';
 
 class DetailsPage extends StatefulWidget {
   final ThumbnailModel model;
@@ -25,7 +26,12 @@ class _DetailsPageState extends State<DetailsPage> {
             outlined: true,
             color: Colors.black,
             icon: Icons.shopping_cart,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ShoppingCartPage()),
+              );
+            },
           ),
           FlyButton(
             icon: Icons.add,

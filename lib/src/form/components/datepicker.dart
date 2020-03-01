@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import '_input_decorator.dart';
 
 /// Handles Input for Date
-/// the model is String of Date
+/// the model is [String] of Date
 class FlyDatepicker extends StatefulWidget {
   /// the label of the [FlyDatepicker]
   final String label;
