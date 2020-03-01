@@ -1,6 +1,6 @@
 # flutterfly
 
-A collection of Flyweight Material UI components.
+A collection of Lightweight Material UI components.
 
 ## Contents
 

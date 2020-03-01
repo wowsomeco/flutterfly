@@ -20,7 +20,7 @@ Added more UI Components
     
     * Button Component
 
-## 0.0.2+1
+## 0.0.2+2
 
 * Added Card Component
 * More Docs
