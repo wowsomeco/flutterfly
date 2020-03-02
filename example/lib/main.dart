@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutterfly/flutterfly.dart';
+import 'global_state.dart';
+import 'shopping_cart_page.dart';
 import 'home_page.dart';
 import 'form_page.dart';
 import 'products_page.dart';
+
+final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
 void main() => runApp(FlyApp(
       model: TestFormModel(),
@@ -32,38 +36,49 @@ class _FlyAppState extends State<FlyApp> {
     return MaterialApp(
         title: 'Form Test',
         theme: flyThemeData(),
-        home: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            actions: [
-              FlyBadge(
-                badgeContent: '3',
-                icon: Icon(
-                  Icons.notifications,
-                  size: 32,
-                  color: Colors.black87,
-                ),
-                onPressed: () {},
-              ),
-            ],
-          ),
-          body: _pages[_curIndex],
-          bottomNavigationBar: BottomNavigationBar(
-            onTap: (idx) {
-              setState(() {
-                _curIndex = idx;
-              });
-            },
-            currentIndex: _curIndex,
-            items: [
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.home), title: Text('Home')),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.shopping_basket), title: Text('Products')),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.person), title: Text('Profile')),
-            ],
-          ),
-        ));
+        navigatorObservers: [routeObserver],
+        home: Builder(
+            builder: (context) => Scaffold(
+                  appBar: AppBar(
+                    backgroundColor: Colors.white,
+                    iconTheme: IconThemeData(color: Colors.black87),
+                    actions: [
+                      FlyBadge(
+                        icon: Icon(Icons.shopping_cart),
+                        badgeContent:
+                            GlobalState().shoppingCarts.length.toString(),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ShoppingCartPage()),
+                          );
+                        },
+                      ),
+                      FlyBadge(
+                        icon: Icon(Icons.notifications),
+                        onPressed: () {},
+                      )
+                    ],
+                  ),
+                  body: _pages[_curIndex],
+                  bottomNavigationBar: BottomNavigationBar(
+                    onTap: (idx) {
+                      setState(() {
+                        _curIndex = idx;
+                      });
+                    },
+                    currentIndex: _curIndex,
+                    items: [
+                      BottomNavigationBarItem(
+                          icon: Icon(Icons.home), title: Text('Home')),
+                      BottomNavigationBarItem(
+                          icon: Icon(Icons.shopping_basket),
+                          title: Text('Products')),
+                      BottomNavigationBarItem(
+                          icon: Icon(Icons.person), title: Text('Profile')),
+                    ],
+                  ),
+                )));
   }
 }

@@ -25,5 +25,10 @@ Added more UI Components
 * Added Card Component
 * More Docs
 * More Example Pages
+
+## 0.0.2+3
+
+* Includes Numeric Component
+* More Example Pages
     
         

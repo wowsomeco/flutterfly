@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutterfly/flutterfly.dart';
-import 'home_page.dart';
 import 'shopping_cart_page.dart';
+import 'global_state.dart';
 
 class DetailsPage extends StatefulWidget {
-  final ThumbnailModel model;
+  final StoreModel model;
 
   DetailsPage({this.model});
 
@@ -13,8 +13,6 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
-  bool _liked = false;
-
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return Scaffold(
@@ -22,10 +20,9 @@ class _DetailsPageState extends State<DetailsPage> {
         iconTheme: IconThemeData(color: Colors.black87),
         backgroundColor: Colors.white,
         actions: <Widget>[
-          FlyButton(
-            outlined: true,
-            color: Colors.black,
-            icon: Icons.shopping_cart,
+          FlyBadge(
+            icon: Icon(Icons.shopping_cart),
+            badgeContent: GlobalState().shoppingCarts.length.toString(),
             onPressed: () {
               Navigator.push(
                 context,
@@ -33,12 +30,6 @@ class _DetailsPageState extends State<DetailsPage> {
               );
             },
           ),
-          FlyButton(
-            icon: Icons.add,
-            color: Colors.grey,
-            outlined: true,
-            onPressed: () {},
-          )
         ],
       ),
       body: SingleChildScrollView(
@@ -63,14 +54,14 @@ class _DetailsPageState extends State<DetailsPage> {
                       ),
                       IconButton(
                         iconSize: 30,
-                        icon: Icon(
-                            _liked ? Icons.favorite : Icons.favorite_border),
-                        color: _liked ? theme.errorColor : Colors.black87,
-                        onPressed: () {
-                          setState(() {
-                            _liked = !_liked;
-                          });
-                        },
+                        icon: Icon(widget.model.liked
+                            ? Icons.favorite
+                            : Icons.favorite_border),
+                        color: widget.model.liked
+                            ? theme.errorColor
+                            : Colors.black87,
+                        onPressed: () => setState(
+                            () => widget.model.liked = !widget.model.liked),
                       )
                     ],
                   ),
@@ -95,7 +86,8 @@ class _DetailsPageState extends State<DetailsPage> {
                 icon: Icons.shopping_cart,
                 label: 'Add To Cart',
                 outlined: true,
-                onPressed: () {},
+                onPressed: () =>
+                    setState(() => GlobalState().addShoppingCart(widget.model)),
               )
             ],
           ),

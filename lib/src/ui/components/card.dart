@@ -14,6 +14,7 @@ class FlyCard extends StatefulWidget {
   final List<Widget> children;
   final MainAxisAlignment mainAxisAlignment;
   final CrossAxisAlignment crossAxisAlignment;
+  final VerticalDirection verticalDirection;
   final EdgeInsetsGeometry margin;
 
   /// internal padding of the card
@@ -28,6 +29,7 @@ class FlyCard extends StatefulWidget {
       this.children = const <Widget>[],
       this.mainAxisAlignment = MainAxisAlignment.start,
       this.crossAxisAlignment = CrossAxisAlignment.center,
+      this.verticalDirection = VerticalDirection.down,
       this.padding = EdgeInsets.zero,
       this.margin = EdgeInsets.zero,
       this.border})
@@ -50,6 +52,7 @@ class _FlyCardState extends State<FlyCard> {
               children: widget.children,
               mainAxisAlignment: widget.mainAxisAlignment,
               crossAxisAlignment: widget.crossAxisAlignment,
+              verticalDirection: widget.verticalDirection,
             )));
   }
 }

@@ -1,84 +1,105 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutterfly/flutterfly.dart';
+import 'global_state.dart';
 
 class ShoppingCartPage extends StatefulWidget {
   @override
   _ShoppingCartState createState() => _ShoppingCartState();
 }
 
-class _ShoppingCartModel {
-  String title;
-
-  _ShoppingCartModel({this.title});
-
-  String get description => 'Description for $title';
-
-  String get price => '\$ ${Random().nextInt(1000)}';
-}
-
 class _ShoppingCartState extends State<ShoppingCartPage> {
-  final List<_ShoppingCartModel> models = [];
-
-  @override
-  void initState() {
-    super.initState();
-    for (int i = 1; i <= 15; i++) {
-      models.add(_ShoppingCartModel(title: 'Item $i'));
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black87),
-        backgroundColor: Colors.white,
-      ),
-      body: ListView.builder(
-          itemCount: models.length,
-          itemBuilder: (context, idx) {
-            return FlyCard(
-              border: Border(
-                  bottom: BorderSide(color: Colors.blueGrey.withAlpha(100))),
-              margin: EdgeInsets.symmetric(horizontal: 5.0),
-              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              direction: Axis.horizontal,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      models[idx].title,
-                      style: Theme.of(context)
-                          .textTheme
-                          .subhead
-                          .copyWith(fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      models[idx].description,
-                      style: Theme.of(context)
-                          .textTheme
-                          .subtitle
-                          .copyWith(color: Colors.grey),
-                    )
-                  ],
-                ),
-                Align(
-                    alignment: Alignment.topCenter,
-                    child: Text(
-                      models[idx].price,
-                      style: Theme.of(context)
-                          .textTheme
-                          .subtitle
-                          .copyWith(fontWeight: FontWeight.bold),
-                    ))
-              ],
-            );
-          }),
+        appBar: AppBar(
+          iconTheme: IconThemeData(color: Colors.black87),
+          backgroundColor: Colors.white,
+        ),
+        body: _buildList());
+  }
+
+  Widget _buildEmpty() {
+    return Center(
+      child: Text('Shopping Cart is empty'),
     );
+  }
+
+  Widget _buildList() {
+    List<ShoppingCartModel> models = GlobalState().shoppingCarts;
+    // Render empty text if the shopping cart is empty
+    if (models.length == 0) {
+      return _buildEmpty();
+    }
+    // Render list
+    return ListView.builder(
+        itemCount: models.length,
+        itemBuilder: (context, idx) {
+          ShoppingCartModel model = models[idx];
+          return FlyCard(
+            border: Border(
+                bottom: BorderSide(color: Colors.blueGrey.withAlpha(100))),
+            margin: EdgeInsets.symmetric(horizontal: 5.0),
+            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // crossAxisAlignment: CrossAxisAlignment.start,
+            direction: Axis.horizontal,
+            children: [
+              Container(
+                width: 70,
+                child: FlyImage(
+                  aspectRatio: 1.0,
+                  url: model.store.imgUrl,
+                ),
+              ),
+              Container(
+                  width: 200,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        model.name,
+                        style: Theme.of(context)
+                            .textTheme
+                            .subtitle
+                            .copyWith(fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        model.description,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        style: Theme.of(context)
+                            .textTheme
+                            .subtitle
+                            .copyWith(color: Colors.grey),
+                      )
+                    ],
+                  )),
+              Row(
+                children: <Widget>[
+                  Text(
+                    model.priceStr,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context)
+                        .textTheme
+                        .subtitle
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    width: 15.0,
+                  ),
+                  FlyNumeric(
+                    min: 1,
+                    onChanged: (v) {
+                      setState(() {
+                        model.qty = v;
+                      });
+                    },
+                    initialValue: model.qty,
+                  )
+                ],
+              )
+            ],
+          );
+        });
   }
 }
