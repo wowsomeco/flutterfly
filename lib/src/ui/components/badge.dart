@@ -20,28 +20,30 @@ class _FlyBadgeState extends State<FlyBadge> {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return Stack(
-      overflow: Overflow.visible,
-      children: [
-        IconButton(
-            padding: EdgeInsets.all(10),
-            icon: widget.icon,
-            onPressed: widget.onPressed),
-        if (widget.badgeContent != null && widget.badgeContent.isNotEmpty)
-          Positioned(
-              top: 5,
-              right: 5,
-              child: Material(
-                type: MaterialType.circle,
-                elevation: 1,
-                color: theme.errorColor,
-                child: Padding(
-                  padding: EdgeInsets.all(5),
-                  child: Text(widget.badgeContent,
-                      style: TextStyle(color: Colors.white)),
-                ),
-              ))
-      ],
-    );
+    return InkWell(
+        onTap: widget.onPressed,
+        child: Stack(
+          overflow: Overflow.visible,
+          children: [
+            Padding(
+              padding: EdgeInsets.all(10),
+              child: widget.icon,
+            ),
+            if (widget.badgeContent != null && widget.badgeContent.isNotEmpty)
+              Positioned(
+                  top: 5,
+                  right: 5,
+                  child: Material(
+                    type: MaterialType.circle,
+                    elevation: 1,
+                    color: theme.errorColor,
+                    child: Padding(
+                      padding: EdgeInsets.all(5),
+                      child: Text(widget.badgeContent,
+                          style: TextStyle(color: Colors.white)),
+                    ),
+                  ))
+          ],
+        ));
   }
 }

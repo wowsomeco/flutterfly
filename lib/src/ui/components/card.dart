@@ -23,6 +23,8 @@ class FlyCard extends StatefulWidget {
   /// the border of the card. it uses the default border defined in [CardTheme] when not defined
   final ShapeBorder border;
 
+  final Color color;
+
   FlyCard(
       {Key key,
       this.direction = Axis.vertical,
@@ -32,7 +34,8 @@ class FlyCard extends StatefulWidget {
       this.verticalDirection = VerticalDirection.down,
       this.padding = EdgeInsets.zero,
       this.margin = EdgeInsets.zero,
-      this.border})
+      this.border,
+      this.color})
       : super(key: key);
 
   @override
@@ -43,6 +46,7 @@ class _FlyCardState extends State<FlyCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
+        color: widget.color,
         margin: widget.margin,
         shape: widget.border,
         child: Container(

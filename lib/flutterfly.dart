@@ -21,6 +21,10 @@ final ThemeData Function() flyThemeData = () {
       primaryColor: primaryColor,
       accentColor: accentColor,
       errorColor: errorColor,
+      appBarTheme: AppBarTheme(
+        color: Colors.white,
+        iconTheme: IconThemeData(color: Colors.black87),
+      ),
       cardTheme: CardTheme(
           elevation: 0,
           shape: OutlineInputBorder(

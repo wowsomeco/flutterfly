@@ -29,6 +29,7 @@ Added more UI Components
 ## 0.0.2+3
 
 * Includes Numeric Component
+* Includes Timeline Component
 * More Example Pages
     
         

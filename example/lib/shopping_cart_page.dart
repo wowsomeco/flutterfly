@@ -10,12 +10,7 @@ class ShoppingCartPage extends StatefulWidget {
 class _ShoppingCartState extends State<ShoppingCartPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.black87),
-          backgroundColor: Colors.white,
-        ),
-        body: _buildList());
+    return Scaffold(appBar: AppBar(), body: _buildList());
   }
 
   Widget _buildEmpty() {
@@ -41,7 +36,6 @@ class _ShoppingCartState extends State<ShoppingCartPage> {
             margin: EdgeInsets.symmetric(horizontal: 5.0),
             padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            // crossAxisAlignment: CrossAxisAlignment.start,
             direction: Axis.horizontal,
             children: [
               Container(

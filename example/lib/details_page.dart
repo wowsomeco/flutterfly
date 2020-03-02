@@ -17,8 +17,6 @@ class _DetailsPageState extends State<DetailsPage> {
     ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black87),
-        backgroundColor: Colors.white,
         actions: <Widget>[
           FlyBadge(
             icon: Icon(Icons.shopping_cart),

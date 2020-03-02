@@ -2,6 +2,8 @@
 
 A collection of Lightweight Material UI components.
 
+![](flutterfly_demo.gif)
+
 ## Contents
 
 - UI Components
@@ -14,6 +16,8 @@ A collection of Lightweight Material UI components.
     - Checkbox
     - Datepicker
     - Dropdown
+    - Numeric
+    - Timeline
 
 ## Documentation
 
