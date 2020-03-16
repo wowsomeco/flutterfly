@@ -32,4 +32,6 @@ Added more UI Components
 * Includes Timeline Component
 * More Example Pages
     
-        
+## 0.1.0
+
+* The library is ready to use now

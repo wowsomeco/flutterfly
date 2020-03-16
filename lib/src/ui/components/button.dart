@@ -50,7 +50,7 @@ class FlyButton extends StatelessWidget {
     this.color,
     this.size,
     this.outlined = false,
-    this.padding = const EdgeInsets.all(10.0),
+    this.padding = const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
     this.borderRadius = 20.0,
     this.icon,
     this.label,

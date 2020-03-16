@@ -1,6 +1,6 @@
 name: flutterfly
 description: A collection of Lightweight Material UI components that will save your development costs drastically.
-version: 0.0.2+3
+version: 0.1.0
 homepage: https://github.com/wowsomeco/flutterfly
 
 environment:
