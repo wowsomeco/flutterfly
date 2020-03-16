@@ -24,6 +24,7 @@ class FlyButton extends StatelessWidget {
   final MaterialTapTargetSize materialTapTargetSize;
   final IconData icon;
   final String label;
+  final bool loading;
 
   /// defines the fill color if (!outlined), outline color if (outlined)
   final Color color;
@@ -38,23 +39,25 @@ class FlyButton extends StatelessWidget {
   final EdgeInsets padding;
   final double borderRadius;
 
-  const FlyButton({
-    Key key,
-    @required this.onPressed,
-    this.onLongPress,
-    this.onHighlightChanged,
-    this.clipBehavior = Clip.none,
-    this.focusNode,
-    this.autofocus = false,
-    this.materialTapTargetSize,
-    this.color,
-    this.size,
-    this.outlined = false,
-    this.padding = const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-    this.borderRadius = 20.0,
-    this.icon,
-    this.label,
-  }) : super(
+  const FlyButton(
+      {Key key,
+      @required this.onPressed,
+      this.onLongPress,
+      this.onHighlightChanged,
+      this.clipBehavior = Clip.none,
+      this.focusNode,
+      this.autofocus = false,
+      this.materialTapTargetSize,
+      this.color,
+      this.size,
+      this.outlined = false,
+      this.padding =
+          const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+      this.borderRadius = 20.0,
+      this.icon,
+      this.label,
+      this.loading = false})
+      : super(
           key: key,
         );
 
@@ -71,14 +74,14 @@ class FlyButton extends StatelessWidget {
             side: borderSide, borderRadius: BorderRadius.circular(borderRadius))
         : CircleBorder(side: borderSide);
     return RawMaterialButton(
-      onPressed: onPressed,
-      onLongPress: onLongPress,
+      onPressed: loading ? null : onPressed,
+      onLongPress: loading ? null : onLongPress,
       onHighlightChanged: onHighlightChanged,
       clipBehavior: clipBehavior,
       focusNode: focusNode,
       autofocus: autofocus,
       materialTapTargetSize: materialTapTargetSize,
-      fillColor: bgColor,
+      fillColor: bgColor.withAlpha(loading ? 200 : 255),
       focusElevation: 0,
       disabledElevation: 0,
       highlightElevation: 0,
@@ -89,28 +92,45 @@ class FlyButton extends StatelessWidget {
       constraints: BoxConstraints(
           minWidth: textSize + padding.horizontal,
           minHeight: textSize + padding.vertical),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          if (icon != null)
-            Icon(
-              icon,
-              size: textSize,
-              color: textColor,
-            ),
-          if (icon != null && label != null)
-            SizedBox(
-              width: 10.0,
-            ),
-          if (label != null)
-            Text(
-              label,
-              style: TextStyle(
-                color: textColor,
+      child: _buildContent(textColor, textSize),
+    );
+  }
+
+  Widget _buildContent(Color textColor, double textSize) {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            if (icon != null)
+              Icon(
+                icon,
+                size: textSize,
+                color: textColor.withAlpha(loading ? 0 : 255),
               ),
-            )
-        ],
-      ),
+            if (icon != null && label != null)
+              SizedBox(
+                width: 10.0,
+              ),
+            if (label != null)
+              Text(
+                label,
+                style: TextStyle(
+                  color: textColor.withAlpha(loading ? 0 : 255),
+                ),
+              )
+          ],
+        ),
+        if (loading)
+          SizedBox(
+              width: textSize,
+              height: textSize,
+              child: CircularProgressIndicator(
+                backgroundColor: textColor,
+                strokeWidth: 2.0,
+              ))
+      ],
     );
   }
 }

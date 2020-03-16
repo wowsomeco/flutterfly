@@ -10,7 +10,11 @@ class ShoppingCartPage extends StatefulWidget {
 class _ShoppingCartState extends State<ShoppingCartPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(), body: _buildList());
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Shopping Cart'),
+        ),
+        body: _buildList());
   }
 
   Widget _buildEmpty() {

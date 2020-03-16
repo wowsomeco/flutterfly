@@ -35,3 +35,11 @@ Added more UI Components
 ## 0.1.0
 
 * The library is ready to use now
+
+## 0.1.0+1
+
+* Set default TextTheme title color in the AppBar to black87
+
+## 0.1.0+2
+
+* FlyButton now has loading state.

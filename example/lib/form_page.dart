@@ -37,6 +37,8 @@ class FormPage extends StatefulWidget {
 }
 
 class _FormPageState extends State<FormPage> {
+  bool _submitting = false;
+
   @override
   Widget build(BuildContext context) {
     Widget form = FlyForm<TestFormModel>(
@@ -48,8 +50,17 @@ class _FormPageState extends State<FormPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 FlyButton(
+                  loading: _submitting,
                   icon: Icons.check,
-                  onPressed: () => controller.validate(),
+                  onPressed: () {
+                    if (controller.validate()) {
+                      setState(() {
+                        _submitting = true;
+                        Future.delayed(Duration(seconds: 1),
+                            () => setState(() => _submitting = false));
+                      });
+                    }
+                  },
                   label: 'Validate',
                 ),
               ],

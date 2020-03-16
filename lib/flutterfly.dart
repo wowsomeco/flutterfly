@@ -25,6 +25,7 @@ final ThemeData Function() flyThemeData = () {
         color: Colors.white,
         iconTheme: IconThemeData(color: Colors.black87),
       ),
+      primaryTextTheme: TextTheme(title: TextStyle(color: Colors.black87)),
       cardTheme: CardTheme(
           elevation: 0,
           shape: OutlineInputBorder(
