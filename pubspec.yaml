@@ -1,6 +1,6 @@
 name: flutterfly
 description: A collection of Lightweight Material UI components that will save your development costs drastically.
-version: 0.1.0+2
+version: 0.1.0+10
 homepage: https://github.com/wowsomeco/flutterfly
 
 environment:
@@ -9,13 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  intl: ^0.16.1  
+  intl: ^0.15.8
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-flutter:
-  plugin:
-    androidPackage: com.example.flutterfly
-    pluginClass: FlutterflyPlugin

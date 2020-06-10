@@ -28,7 +28,7 @@ class _FlyAppState extends State<FlyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Form Test',
-        theme: flyThemeData(),
+        theme: flyThemeData('JosefinSans'),
         navigatorObservers: [routeObserver],
         home: _Layout());
   }

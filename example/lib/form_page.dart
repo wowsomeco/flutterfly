@@ -4,12 +4,11 @@ import 'package:flutterfly/flutterfly.dart';
 const String FieldString = 'Field String';
 const String FieldCheckbox = 'Field Checkbox';
 const String FieldDatepicker = 'Field Datepicker';
+const String FieldDatepicker2 = 'Field Datepicker 2';
 const String FieldDropdownString = 'Field Dropdown String';
 const String FieldDropdownInt = 'Field Dropdown Int';
 
-final Widget gutter = Padding(
-  padding: EdgeInsets.all(5),
-);
+Widget gutter({double h: 10.0}) => SizedBox(height: h);
 
 class TestDropdownModel {
   int id;
@@ -22,6 +21,7 @@ class TestFormModel {
   int id;
   String testString;
   String testDate;
+  String testDate2;
   bool testBool;
   String testDropdownString;
   int testDropdownInt;
@@ -46,26 +46,6 @@ class _FormPageState extends State<FormPage> {
       builder: (context, controller, model) {
         Widget formFields = Column(
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                FlyButton(
-                  loading: _submitting,
-                  icon: Icons.check,
-                  onPressed: () {
-                    if (controller.validate()) {
-                      setState(() {
-                        _submitting = true;
-                        Future.delayed(Duration(seconds: 1),
-                            () => setState(() => _submitting = false));
-                      });
-                    }
-                  },
-                  label: 'Validate',
-                ),
-              ],
-            ),
-            gutter,
             TextFormField(
                 key: Key(FieldString),
                 decoration: InputDecoration(labelText: FieldString),
@@ -76,54 +56,50 @@ class _FormPageState extends State<FormPage> {
                     model.testString = value;
                   });
                 }),
-            gutter,
+            gutter(),
             FlyCheckbox(
               key: Key(FieldCheckbox),
               label: FieldCheckbox,
               tristate: true,
               initialValue: model.testBool,
-              onChanged: (v) {
-                controller.onChanged(() {
-                  model.testBool = v;
-                });
-              },
+              onChanged: (v) => controller.onChanged(() => model.testBool = v),
               validator: FlyFormValidator.required(),
             ),
-            gutter,
+            gutter(),
             FlyDatepicker(
               key: Key(FieldDatepicker),
               label: FieldDatepicker,
               initialValue: model.testDate,
-              onChanged: (v) {
-                controller.onChanged(() {
-                  model.testDate = v;
-                });
-              },
+              onChanged: (v) => controller.onChanged(() => model.testDate = v),
               validator: FlyFormValidator.required(),
             ),
-            gutter,
+            gutter(),
+            FlyDatepicker(
+              key: Key(FieldDatepicker2),
+              label: FieldDatepicker2,
+              initialValue: model.testDate2,
+              firstDate: DateTime(1999),
+              lastDate: DateTime(2004),
+              onChanged: (v) => controller.onChanged(() => model.testDate2 = v),
+              validator: FlyFormValidator.required(),
+            ),
+            gutter(),
             FlyDropdown<String, String>(
                 label: FieldDropdownString,
                 validator: FlyFormValidator.required(),
                 initialValue: model.testDropdownString,
-                onChanged: (v) {
-                  controller.onChanged(() {
-                    model.testDropdownString = v;
-                  });
-                },
+                onChanged: (v) =>
+                    controller.onChanged(() => model.testDropdownString = v),
                 optionKey: (v) => v,
                 optionValue: (v) => v,
                 options: () async => <String>['Test 1', 'Test 2']),
-            gutter,
+            gutter(),
             FlyDropdown<int, TestDropdownModel>(
               label: FieldDropdownInt,
               validator: FlyFormValidator.required(),
               initialValue: model.testDropdownInt,
-              onChanged: (v) {
-                controller.onChanged(() {
-                  model.testDropdownInt = v.id;
-                });
-              },
+              onChanged: (v) =>
+                  controller.onChanged(() => model.testDropdownInt = v.id),
               optionValue: (v) => v?.name,
               optionKey: (v) => v?.id,
               options: () async {
@@ -131,19 +107,30 @@ class _FormPageState extends State<FormPage> {
                 await Future.delayed(Duration(seconds: 1));
                 return _buildDropdownModelOptions();
               },
+            ),
+            gutter(h: 20),
+            FlyButton(
+              outlined: true,
+              loading: _submitting,
+              icon: Icons.check,
+              onPressed: () {
+                if (controller.validate()) {
+                  setState(() {
+                    _submitting = true;
+                    Future.delayed(Duration(seconds: 1),
+                        () => setState(() => _submitting = false));
+                  });
+                }
+              },
+              label: 'Validate',
             )
           ],
         );
-        return SingleChildScrollView(
-          child: formFields,
-        );
+        return SingleChildScrollView(child: formFields);
       },
     );
     // return widget
-    return Padding(
-      padding: EdgeInsets.all(15),
-      child: form,
-    );
+    return Padding(padding: EdgeInsets.all(15), child: form);
   }
 
   List<TestDropdownModel> _buildDropdownModelOptions() {

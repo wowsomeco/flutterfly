@@ -17,7 +17,7 @@ class _TestAppState extends State<TestApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Form Test',
-        theme: flyThemeData(),
+        theme: flyThemeData('JosefinSans'),
         home: Scaffold(
           appBar: AppBar(),
           body: FormPage(

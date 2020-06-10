@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 export 'src/form/index.dart';
 export 'src/ui/components/index.dart';
 
-final ThemeData Function() flyThemeData = () {
+final ThemeData Function(String fontFamily) flyThemeData = (String fontFamily) {
   Color primaryColor = Color.fromARGB(255, 36, 123, 160);
   Color errorColor = Color.fromARGB(255, 235, 84, 124);
   Color accentColor = Color.fromARGB(255, 112, 193, 179);
@@ -15,17 +15,28 @@ final ThemeData Function() flyThemeData = () {
       color: Color.fromARGB(255, 134, 134, 134),
       fontWeight: FontWeight.bold);
   BorderSide inputBorder = BorderSide(width: 1.5);
+  Color textColor = Colors.black87;
   // returns our wonderful theme
   return ThemeData(
-      fontFamily: 'JosefinSans',
+      fontFamily: fontFamily,
       primaryColor: primaryColor,
       accentColor: accentColor,
       errorColor: errorColor,
       appBarTheme: AppBarTheme(
         color: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black87),
+        iconTheme: IconThemeData(color: textColor),
       ),
-      primaryTextTheme: TextTheme(title: TextStyle(color: Colors.black87)),
+      primaryTextTheme: TextTheme(
+          headline1: TextStyle(color: textColor),
+          headline2: TextStyle(color: textColor),
+          headline3: TextStyle(color: textColor),
+          headline4: TextStyle(color: textColor),
+          headline5: TextStyle(color: textColor),
+          headline6: TextStyle(color: textColor),
+          bodyText1: TextStyle(color: textColor),
+          bodyText2: TextStyle(color: textColor),
+          subtitle1: TextStyle(color: textColor),
+          subtitle2: TextStyle(color: textColor)),
       cardTheme: CardTheme(
           elevation: 0,
           shape: OutlineInputBorder(

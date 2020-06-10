@@ -50,7 +50,7 @@ class _ShoppingCartState extends State<ShoppingCartPage> {
                 ),
               ),
               Container(
-                  width: 200,
+                  width: 150,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -72,8 +72,23 @@ class _ShoppingCartState extends State<ShoppingCartPage> {
                       )
                     ],
                   )),
-              Row(
+              Column(
                 children: <Widget>[
+                  FlyNumeric(
+                    border: Border(),
+                    direction: Axis.horizontal,
+                    min: 1,
+                    max: 1000,
+                    onChanged: (v) {
+                      setState(() {
+                        model.qty = v;
+                      });
+                    },
+                    initialValue: model.qty,
+                  ),
+                  SizedBox(
+                    height: 15.0,
+                  ),
                   Text(
                     model.priceStr,
                     textAlign: TextAlign.center,
@@ -82,18 +97,6 @@ class _ShoppingCartState extends State<ShoppingCartPage> {
                         .subtitle
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
-                    width: 15.0,
-                  ),
-                  FlyNumeric(
-                    min: 1,
-                    onChanged: (v) {
-                      setState(() {
-                        model.qty = v;
-                      });
-                    },
-                    initialValue: model.qty,
-                  )
                 ],
               )
             ],

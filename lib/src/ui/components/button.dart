@@ -64,8 +64,9 @@ class FlyButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    Color bgColor = outlined ? Colors.white : color ?? theme.primaryColor;
-    Color textColor = outlined ? color ?? theme.primaryColor : Colors.white;
+    Color bgColor = outlined ? theme.canvasColor : color ?? theme.primaryColor;
+    Color textColor =
+        outlined ? color ?? theme.primaryColor : theme.canvasColor;
     double textSize = size ?? theme.inputDecorationTheme.labelStyle.fontSize;
     BorderSide borderSide =
         outlined ? BorderSide(color: textColor, width: 1.5) : BorderSide.none;

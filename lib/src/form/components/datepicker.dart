@@ -76,7 +76,7 @@ class _FlyDatepickerState extends State<FlyDatepicker> {
     DateTime newValue = await showDatePicker(
         context: context,
         initialDate: widget.initialValue == null
-            ? DateTime.now()
+            ? widget.lastDate.subtract(Duration(days: 1))
             : DateTime.parse(widget.initialValue),
         firstDate: widget.firstDate,
         lastDate: widget.lastDate);
