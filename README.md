@@ -1,36 +1,33 @@
 # flutterfly
 
-A collection of Lightweight Material UI components.
+A collection of common widgets, extensions, utilities, as well as some other stuffs that are currently non-existent.
 
-![](flutterfly_demo.gif)
+## Main Considerations
+
+- Only includes the stuffs that don't exist yet, yet essentially important and is broadly re-used across our projects, hence we expect this library to be `open for extension, but closed for modification`
+- Brutally **tested**
 
 ## Contents
 
-- UI Components
-    - Badge
-    - URL Image
-    - Card
-    - Button
+- **Views**
 
-- Form Components
-    - Checkbox
-    - Datepicker
-    - Dropdown
-    - Numeric
+  - Widget Components
+    - URL Image with loading progress
     - Timeline
+
+- **Common**
+
+  - Extensions
+    - String Extensions
+  - Utils
+    - Connection Utils
 
 ## Documentation
 
-Coming Soon
+Coming Soon.
 
-## Purpose
+Pull requests are welcome :)
 
-This package will not replace the current existing Flutter Material Widgets. They're both meant to coexist.
+## License
 
-It consists of a set of UI components that will reduce (y)our development costs drastically. Some of them are nonexistent e.g. Badge, Datepicker Form Field, etc. 
-Some of them already exist but we found that it's not too pretty and doesn't really satisfy our needs e.g. FlyDropdown<T, U> where it's meant to be an alternative of the current existing Dropdown Form Field with more use case where sometimes the Dropdown options can be of a List of Some class-based model (might have been a class that has both int id and String name) that when one of them is selected, it only needs to store the id, not the class itself.
-Some of them are the wrappers of the current Material Widgets e.g. FlyCard where it wraps up the existing Card widget that can be aligned both vertically or horizontally with less effort as compared to the built-in one.
-
-Additionally, we would like to showcase to our internal team about UI/UX guidelines as well as the best practices when it comes to making apps for our clients too that are reflected in the example pages.
-
-We'll be constantly updating this package should there be demands internally OR if any of you have some suggestions of Widget that doesn't exist that is generic enough to cater for different needs.
+[**MIT**][license].

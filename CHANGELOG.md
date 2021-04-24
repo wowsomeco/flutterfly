@@ -1,5 +1,5 @@
-## 0.1.0+10
+## 0.2.0
 
-* Fixed assert bug in FlyDatePicker when last date is set before today.
-* Updated button default color to the theme canvas color instead of white.
-
+- Refactored stuffs.
+- Removed unused files.
+- Added extensions and utilities.
