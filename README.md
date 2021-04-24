@@ -30,4 +30,4 @@ Pull requests are welcome :)
 
 ## License
 
-[**MIT**][license].
+**MIT**
