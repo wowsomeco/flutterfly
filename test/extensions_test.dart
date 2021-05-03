@@ -49,6 +49,61 @@ void main() {
       expect(str1.intersects(str2), false);
       expect(str2.intersects(str1), false);
     });
+
+    test('containsDigit', () {
+      String? testStr;
+      expect(testStr.containsDigit(), false);
+      testStr = '2012-01-01';
+      expect(testStr.containsDigit(), true);
+      testStr = 'Test !@#^&*()_+';
+      expect(testStr.containsDigit(), false);
+      testStr = 'Test <>?|[]~';
+      expect(testStr.containsDigit(), false);
+      testStr = 'Test123';
+      expect(testStr.containsDigit(), true);
+      testStr = 'I like to eat apples and bananas';
+      expect(testStr.containsDigit(), false);
+    });
+
+    test('digitsOnly', () {
+      String? testStr;
+      expect(testStr.isDigitOnly(), false);
+      testStr = '2012-01-01';
+      expect(testStr.isDigitOnly(), false);
+      testStr = 'Test !@#^&*()_+';
+      expect(testStr.isDigitOnly(), false);
+      testStr = '12345678910';
+      expect(testStr.isDigitOnly(), true);
+      testStr = 'Test123';
+      expect(testStr.isDigitOnly(), false);
+      testStr = 'I like 123 456';
+      expect(testStr.isDigitOnly(), false);
+    });
+
+    test('isValidEmail', () {
+      String? testStr;
+      expect(testStr.isValidEmail(), false);
+      testStr = 'aaa@';
+      expect(testStr.isValidEmail(), false);
+      testStr = 'aaa@a';
+      expect(testStr.isValidEmail(), false);
+      testStr = 'aaa@a.com';
+      expect(testStr.isValidEmail(), true);
+    });
+
+    test('containsAny', () {
+      String? testStr = 'abc def';
+      expect(testStr.containsAny(' '), true);
+      testStr = 'aaabbbccc!@#';
+      expect(testStr.containsAny(' '), false);
+      testStr = 'aaa bbb ccc! @#';
+      expect(testStr.containsAny(' '), true);
+      testStr = 'aaa bbb ccc *()#';
+      expect(testStr.containsAny('-+=!'), false);
+      expect(testStr.containsAny('()'), true);
+      expect(testStr.containsAny('#'), true);
+      expect(testStr.containsAny('*'), true);
+    });
   });
 
   group('map_extensions', () {

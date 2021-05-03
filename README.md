@@ -1,6 +1,15 @@
 # flutterfly
 
-A collection of common widgets, extensions, utilities, as well as some other stuffs that are currently non-existent.
+A collection of common widgets, validators, extensions, utilities, as well as some other stuffs that are currently non-existent.
+
+## Getting Started
+
+- Add [flutterfly](https://pub.dev/packages/flutterfly) to your flutter package's pubspec.yaml file :
+
+  ```yaml
+  dependencies:
+    flutterfly: ^<latest_version>
+  ```
 
 ## Main Considerations
 
@@ -19,6 +28,20 @@ A collection of common widgets, extensions, utilities, as well as some other stu
 
   - Extensions
     - String Extensions
+    - Num Extensions
+    - Map Extensions
+  - Validators
+    - String Validator
+      - Min Length
+      - Special Characters
+      - Email
+      - etc.
+    - Num Validator
+      - Positive
+      - Greater Than
+      - Less Than
+      - Between
+      - etc.
   - Utils
     - Connection Utils
 

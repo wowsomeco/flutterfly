@@ -14,6 +14,7 @@ class _FlyAppState extends State<FlyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        theme: ThemeData(fontFamily: 'JosefinSans'),
         title: 'View Test',
         navigatorObservers: [routeObserver],
         home: _Layout());
@@ -29,7 +30,11 @@ class _LayoutState extends State<_Layout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: HomePage(),
+      body: SafeArea(
+          child: Padding(
+        padding: EdgeInsets.all(10),
+        child: HomePage(),
+      )),
     );
   }
 }
