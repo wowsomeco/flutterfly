@@ -1,6 +1,6 @@
 # flutterfly
 
-A collection of common widgets, validators, extensions, utilities, as well as some other stuffs that are currently non-existent.
+A collection of common widgets, validators, extensions, utilities, as well as some other stuffs that are currently non-existent in Flutter.
 
 ## Getting Started
 
@@ -28,13 +28,25 @@ A collection of common widgets, validators, extensions, utilities, as well as so
 
   - Extensions
     - String Extensions
+      - Capitalize
+      - ToDateTime
+      - Digit Only
+      - etc.
     - Num Extensions
+      - isBetween(min, max)
     - Map Extensions
+    - DateTime Extensions
+      - Calculate Age
   - Validators
     - String Validator
       - Min Length
       - Special Characters
       - Email
+      - Valid Date
+      - Allow Digits Only
+      - Disallow any digits
+      - No white space
+      - Contains
       - etc.
     - Num Validator
       - Positive
@@ -44,6 +56,7 @@ A collection of common widgets, validators, extensions, utilities, as well as so
       - etc.
   - Utils
     - Connection Utils
+      - Check Internet Connection
 
 ## Documentation
 

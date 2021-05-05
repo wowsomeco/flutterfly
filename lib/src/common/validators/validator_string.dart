@@ -1,5 +1,6 @@
 import 'package:flutterfly/flutterfly.dart';
 
+/// Validators that are specifically for [String] only
 class ValidatorString extends Validator {
   ValidatorString(dynamic value) : super(value);
 
@@ -45,6 +46,21 @@ class ValidatorString extends Validator {
 
   ValidatorString email({String errMsg = 'Not a valid email'}) {
     validate((v) => value.toString().isValidEmail() ? null : errMsg);
+    return this;
+  }
+
+  ValidatorString validDate(
+      {String format = 'yyyy-MM-dd', String errMsg = 'Not a valid date'}) {
+    validate((v) => value.toString().isValidDate(fmt: format) ? null : errMsg);
+    return this;
+  }
+
+  ValidatorString contains(String subStr,
+      {String Function(String subStr)? errMsg}) {
+    validate((v) => value.toString().contains(subStr)
+        ? null
+        : DynamicUtils.checkNull(errMsg, () => 'Must contain $subStr',
+            ifNotNull: () => errMsg!(subStr)));
     return this;
   }
 }

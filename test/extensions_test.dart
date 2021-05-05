@@ -35,9 +35,30 @@ void main() {
       String? testStr;
       expect(testStr.formatDate(), null);
       testStr = '2012-01-01';
-      expect(testStr.formatDate(fmt: 'dd MMM yy'), '01 Jan 12');
+      expect(testStr.formatDate(fmt: 'dd MMM yy', strict: false), '01 Jan 12');
       testStr = '2012-02-27 13:27:00';
-      expect(testStr.formatDate(), '2012-02-27');
+      expect(testStr.formatDate(strict: false), '2012-02-27');
+      testStr = '2020-02-22';
+      expect(testStr.formatDate(fmt: 'dd MMM yy', strict: false), '22 Feb 20');
+    });
+
+    test('isValidDate', () {
+      String? testStr;
+      expect(testStr.isValidDate(), false);
+      testStr = '2012-01-01';
+      expect(testStr.isValidDate(), true);
+      testStr = '2012-02-27 13:27:00';
+      expect(testStr.isValidDate(fmt: 'yyyy-MM-dd HH:mm:ss'), true);
+      testStr = '2012-02-27-21';
+      expect(testStr.isValidDate(), false);
+      testStr = '2012-21-13';
+      expect(testStr.isValidDate(), false);
+      testStr = '2010-30-30';
+      expect(testStr.isValidDate(), false);
+      testStr = '2020-13-10';
+      expect(testStr.isValidDate(), false);
+      testStr = '2020-02-28';
+      expect(testStr.isValidDate(), true);
     });
 
     test('intersects', () {
@@ -155,6 +176,32 @@ void main() {
           m.toList('name', (item) => item.toString(), fallback: []);
       expect(nameList!.length, 0);
       expect(nameList, []);
+    });
+  });
+
+  group('datetime_extensions', () {
+    test('age', () {
+      String? dateStr = '2000-10-10';
+      // assuming today is year 2021
+      expect(dateStr.toDateTime().age(), 21);
+      dateStr = '1001-10-10';
+      expect(dateStr.toDateTime().age(), 1020);
+      dateStr = '1901-10-10';
+      expect(dateStr.toDateTime().age(), 120);
+      dateStr = '2012-02-27 13:27:00';
+      expect(dateStr.toDateTime().age(), 9);
+      dateStr = '2011-02-27 13:27:00.123456789z';
+      expect(dateStr.toDateTime().age(), 10);
+      dateStr = '+19870227';
+      expect(dateStr.toDateTime().age(), 34);
+      dateStr = '1880-02-27T14Z';
+      expect(dateStr.toDateTime().age(), 141);
+      // test null
+      dateStr = null;
+      expect(dateStr.toDateTime().age(), null);
+      // test invalid date should return null
+      dateStr = '2001-110-110';
+      expect(dateStr.toDateTime().age(), null);
     });
   });
 }

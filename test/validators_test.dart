@@ -59,6 +59,36 @@ void main() {
       validator = ValidatorString('10/111.222-333');
       expect(validator.noSpecialChars('/-').build(),
           'Can not contain special characters /-');
+
+      validator = ValidatorString(null);
+      expect(validator.validDate().build(), 'Not a valid date');
+
+      validator = ValidatorString('2021-30-02');
+      expect(validator.validDate().build(), 'Not a valid date');
+
+      validator = ValidatorString('2021-02-28');
+      expect(validator.validDate().build(), null);
+
+      validator = ValidatorString('20/01/2021');
+      expect(validator.validDate(format: 'dd/MM/yyyy').build(), null);
+
+      Validator v = ValidatorString('test').length(min: 10);
+      expect(v.build(), 'Length must be greater than 10');
+
+      v = ValidatorString(null).length(min: 10);
+      expect(v.build(), 'Length must be greater than 10');
+
+      v = ValidatorString('abc de').length(min: 1, max: 5);
+      expect(v.build(), 'Length must be between 1 and 5');
+
+      v = ValidatorString('abc def').contains('def');
+      expect(v.build(), null);
+
+      v = ValidatorString(null).contains('def');
+      expect(v.build(), 'Must contain def');
+
+      v = ValidatorString('abc de').contains('def');
+      expect(v.build(), 'Must contain def');
     });
   });
 }

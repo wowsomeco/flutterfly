@@ -1,3 +1,5 @@
+import 'package:flutterfly/flutterfly.dart';
+
 typedef ValidationRule = String? Function(dynamic value);
 typedef ValidationUnless = bool Function(dynamic value);
 
@@ -38,6 +40,26 @@ class Validator {
 
   Validator validate(ValidationRule rule) {
     _rules.add(rule);
+    return this;
+  }
+
+  /// Checks the length of the [value]
+  /// makes sure it's between [min] and [max] range
+  Validator length(
+      {int min = 0,
+      int max = int64Max,
+      String Function(String val, int min, int max)? errMsg}) {
+    validate((v) {
+      if (value == null || !value.toString().length.isBetween(min, max)) {
+        String err = max == int64Max
+            ? 'Length must be greater than $min'
+            : 'Length must be between $min and $max';
+        return errMsg != null ? errMsg(value.toString(), min, max) : err;
+      }
+
+      return null;
+    });
+
     return this;
   }
 

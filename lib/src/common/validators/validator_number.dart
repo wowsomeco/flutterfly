@@ -1,8 +1,10 @@
 import 'package:flutterfly/flutterfly.dart';
 
+/// Validators that are specifically for [num] only
 class ValidatorNumber extends Validator {
   ValidatorNumber(dynamic value) : super(value);
 
+  /// Ensures the [value] can not be negative
   ValidatorNumber positive({String errMsg = 'Must be positive'}) {
     validate((v) {
       num? number = num.tryParse(value.toString());
@@ -12,6 +14,7 @@ class ValidatorNumber extends Validator {
     return this;
   }
 
+  /// Makes sure the [value] is between [min] and [max]
   ValidatorNumber between(num min, num max,
       {String Function(num min, num max)? errMsg}) {
     validate((v) {
@@ -28,13 +31,13 @@ class ValidatorNumber extends Validator {
     return this;
   }
 
-  /// Greater than comparison
+  /// Greater than [limit] comparison
   ValidatorNumber gt(num limit, {String Function(num limit)? errMsg}) {
     _compare(limit, (v) => v > limit, 'greater');
     return this;
   }
 
-  /// Less than comparison
+  /// Less than [limit] comparison
   ValidatorNumber lt(num limit, {String Function(num limit)? errMsg}) {
     _compare(limit, (v) => v < limit, 'less');
     return this;
