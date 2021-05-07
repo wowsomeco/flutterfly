@@ -10,6 +10,13 @@ extension DateTimeExtensions on DateTime? {
   int? age() {
     if (this == null) return null;
 
-    return DateTime.now().year - this!.year;
+    DateTime cur = this!;
+    DateTime now = DateTime.now();
+    int age = now.year - cur.year;
+    if (cur.month <= now.month && cur.day < now.day) {
+      age--;
+    }
+
+    return age;
   }
 }

@@ -32,6 +32,15 @@ void main() {
       validator = ValidatorNumber('9').between(10, 20,
           errMsg: (min, max) => 'Must be between $min and $max');
       expect(validator.build(), 'Must be between 10 and 20');
+
+      validator = ValidatorNumber(null).required();
+      expect(validator.build(), 'Field is required');
+
+      validator = ValidatorNumber(10).required();
+      expect(validator.build(), null);
+
+      validator = ValidatorNumber(-1).required();
+      expect(validator.build(), null);
     });
 
     test('string', () {
@@ -89,6 +98,15 @@ void main() {
 
       v = ValidatorString('abc de').contains('def');
       expect(v.build(), 'Must contain def');
+
+      v = ValidatorString(null).required();
+      expect(v.build(), 'Field is required');
+
+      v = ValidatorString('').required();
+      expect(v.build(), 'Field is required');
+
+      v = ValidatorString('a').required();
+      expect(v.build(), null);
     });
   });
 }

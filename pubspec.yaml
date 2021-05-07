@@ -1,6 +1,6 @@
 name: flutterfly
 description: A collection of common widgets, validators, extensions, utilities, as well as some other stuffs that are currently non-existent.
-version: 0.2.0+4
+version: 0.2.0+5
 homepage: https://github.com/wowsomeco/flutterfly
 
 environment:

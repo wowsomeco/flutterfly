@@ -39,6 +39,7 @@ A collection of common widgets, validators, extensions, utilities, as well as so
       - Calculate Age
   - Validators
     - String Validator
+      - Required
       - Min Length
       - Special Characters
       - Email
@@ -49,6 +50,7 @@ A collection of common widgets, validators, extensions, utilities, as well as so
       - Contains
       - etc.
     - Num Validator
+      - Required
       - Positive
       - Greater Than
       - Less Than

@@ -182,8 +182,16 @@ void main() {
   group('datetime_extensions', () {
     test('age', () {
       String? dateStr = '2000-10-10';
-      // assuming today is year 2021
+      // assuming today is year 07-05-2021
       expect(dateStr.toDateTime().age(), 21);
+      dateStr = '2001-05-07';
+      expect(dateStr.toDateTime().age(), 20);
+      dateStr = '2001-05-06';
+      expect(dateStr.toDateTime().age(), 19);
+      dateStr = '2001-05-01';
+      expect(dateStr.toDateTime().age(), 19);
+      dateStr = '2001-05-08';
+      expect(dateStr.toDateTime().age(), 20);
       dateStr = '1001-10-10';
       expect(dateStr.toDateTime().age(), 1020);
       dateStr = '1901-10-10';

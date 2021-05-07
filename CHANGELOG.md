@@ -1,3 +1,8 @@
+## 0.2.0+5
+
+- Added required validator in ValidationString and ValidatorNumber.
+- Fix age() calculation.
+
 ## 0.2.0+4
 
 - Added more methods in ValidatorString.

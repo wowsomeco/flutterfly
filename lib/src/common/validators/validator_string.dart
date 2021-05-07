@@ -4,6 +4,11 @@ import 'package:flutterfly/flutterfly.dart';
 class ValidatorString extends Validator {
   ValidatorString(dynamic value) : super(value);
 
+  ValidatorString required({String errMsg = 'Field is required'}) {
+    validate((v) => v == null || v.toString().isNullOrEmpty ? errMsg : null);
+    return this;
+  }
+
   ValidatorString minLen(int min, {String Function(int min)? errMsg}) {
     validate((v) {
       int len = value.toString().length;
