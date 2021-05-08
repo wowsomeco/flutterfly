@@ -183,33 +183,34 @@ void main() {
     test('age', () {
       String? dateStr = '2000-10-10';
       // assuming today is year 07-05-2021
-      expect(dateStr.toDateTime().age(), 21);
+      DateTime now = DateTime.parse('2021-05-07');
+      expect(dateStr.toDateTime().age(until: now), 21);
       dateStr = '2001-05-07';
-      expect(dateStr.toDateTime().age(), 20);
+      expect(dateStr.toDateTime().age(until: now), 20);
       dateStr = '2001-05-06';
-      expect(dateStr.toDateTime().age(), 19);
+      expect(dateStr.toDateTime().age(until: now), 19);
       dateStr = '2001-05-01';
-      expect(dateStr.toDateTime().age(), 19);
+      expect(dateStr.toDateTime().age(until: now), 19);
       dateStr = '2001-05-08';
-      expect(dateStr.toDateTime().age(), 20);
+      expect(dateStr.toDateTime().age(until: now), 20);
       dateStr = '1001-10-10';
-      expect(dateStr.toDateTime().age(), 1020);
+      expect(dateStr.toDateTime().age(until: now), 1020);
       dateStr = '1901-10-10';
-      expect(dateStr.toDateTime().age(), 120);
+      expect(dateStr.toDateTime().age(until: now), 120);
       dateStr = '2012-02-27 13:27:00';
-      expect(dateStr.toDateTime().age(), 9);
+      expect(dateStr.toDateTime().age(until: now), 9);
       dateStr = '2011-02-27 13:27:00.123456789z';
-      expect(dateStr.toDateTime().age(), 10);
+      expect(dateStr.toDateTime().age(until: now), 10);
       dateStr = '+19870227';
-      expect(dateStr.toDateTime().age(), 34);
+      expect(dateStr.toDateTime().age(until: now), 34);
       dateStr = '1880-02-27T14Z';
-      expect(dateStr.toDateTime().age(), 141);
+      expect(dateStr.toDateTime().age(until: now), 141);
       // test null
       dateStr = null;
-      expect(dateStr.toDateTime().age(), null);
+      expect(dateStr.toDateTime().age(until: now), null);
       // test invalid date should return null
       dateStr = '2001-110-110';
-      expect(dateStr.toDateTime().age(), null);
+      expect(dateStr.toDateTime().age(until: now), null);
     });
   });
 }

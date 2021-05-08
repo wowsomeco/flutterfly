@@ -1,3 +1,7 @@
+## 0.2.0+6
+
+- Added `until` param in age().
+
 ## 0.2.0+5
 
 - Added required validator in ValidationString and ValidatorNumber.
