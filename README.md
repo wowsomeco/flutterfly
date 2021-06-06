@@ -62,7 +62,13 @@ A collection of common widgets, validators, extensions, utilities, as well as so
 
 ## Documentation
 
-Coming Soon.
+# Validators
+
+Please check out the [Unit Tests](https://github.com/wowsomeco/flutterfly/blob/master/test/validators_test.dart) as well as the [Example](https://github.com/wowsomeco/flutterfly/blob/master/example/lib/home_page.dart)
+
+# Extensions
+
+Please check out the [Unit Tests](https://github.com/wowsomeco/flutterfly/blob/master/test/extensions_test.dart)
 
 Pull requests are welcome :)
 
