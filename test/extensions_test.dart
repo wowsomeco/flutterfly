@@ -128,7 +128,29 @@ void main() {
   });
 
   group('map_extensions', () {
-    test('mapper', () {
+    test('hasValue', () {
+      Map m = {'id': 1, 'name': 'A'};
+      expect(m.hasValue('id'), true);
+      expect(m.hasValue('name'), true);
+      expect(m.hasValue('nama'), false);
+    });
+
+    test('tryCast', () {
+      Map m = {
+        'id': 1,
+        'test': {'value': 'A', 'number': 1}
+      };
+      ObjectTest? t = m.tryCast('test', (item) => ObjectTest(item));
+
+      expect(t != null, true);
+      expect(t!.value, 'A');
+      expect(t.number, 1);
+
+      ObjectTest? u = m.tryCast('tests', (item) => ObjectTest(item));
+      expect(u == null, true);
+    });
+
+    test('toList', () {
       String jsonStr = """
       {
         "id": "file",

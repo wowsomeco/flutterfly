@@ -1,3 +1,8 @@
+## 0.2.0+7
+
+- MapExtensions: added hasValue(key)
+- MapExtensions: added tryCast<T>(key)
+
 ## 0.2.0+6
 
 - Added `until` param in age().
