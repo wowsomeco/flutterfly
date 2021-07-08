@@ -125,6 +125,21 @@ void main() {
       expect(testStr.containsAny('#'), true);
       expect(testStr.containsAny('*'), true);
     });
+
+    test('ellipsis', () {
+      String? testStr;
+      expect(testStr.ellipsis(), null);
+      testStr = 'aabb ccdd eeff';
+      expect(testStr.ellipsis(maxLength: 9), 'aabb ccdd...');
+      testStr = 'aabb ccdd eeff gghhi';
+      expect(testStr.ellipsis(maxLength: 20), 'aabb ccdd eeff gghhi');
+      expect(testStr.ellipsis(maxLength: 10), 'aabb ccdd...');
+      expect(testStr.ellipsis(maxLength: 10, replaceWith: '__'), 'aabb ccdd__');
+      expect(testStr.ellipsis(maxLength: 5), 'aabb...');
+      expect(testStr.ellipsis(maxLength: 5, replaceWith: '..'), 'aabb..');
+      testStr = 'aabb';
+      expect(testStr.ellipsis(maxLength: 15), 'aabb');
+    });
   });
 
   group('map_extensions', () {

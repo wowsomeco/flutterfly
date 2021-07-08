@@ -109,4 +109,13 @@ extension StringExtensions on String? {
             r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
         .hasMatch(this!);
   }
+
+  String? ellipsis({int maxLength = 20, String replaceWith = '...'}) {
+    if (this == null)
+      return null;
+    else if (this!.length <= maxLength) return this;
+
+    String sub = this!.substring(0, maxLength).trim();
+    return '$sub$replaceWith';
+  }
 }

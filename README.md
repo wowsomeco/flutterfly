@@ -31,10 +31,14 @@ A collection of common widgets, validators, extensions, utilities, as well as so
       - Capitalize
       - ToDateTime
       - Digit Only
+      - Ellipsis
       - etc.
     - Num Extensions
       - isBetween(min, max)
     - Map Extensions
+      - tryCast
+      - hasValue(String key)
+      - toList
     - DateTime Extensions
       - Calculate Age
   - Validators

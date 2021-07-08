@@ -1,3 +1,7 @@
+## 0.2.0+8
+
+- StringExtensions: added ellipsis({int maxLength = 20, String replaceWith = '...'})
+
 ## 0.2.0+7
 
 - MapExtensions: added hasValue(key)
