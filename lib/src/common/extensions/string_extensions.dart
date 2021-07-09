@@ -118,4 +118,14 @@ extension StringExtensions on String? {
     String sub = this!.substring(0, maxLength).trim();
     return '$sub$replaceWith';
   }
+
+  String? removeFromLast(int length) {
+    if (this == null) return null;
+
+    int diff = this!.length - length;
+    if (diff <= 0) return '';
+
+    String sub = this!.substring(0, diff);
+    return sub;
+  }
 }

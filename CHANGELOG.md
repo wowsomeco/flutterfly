@@ -1,3 +1,7 @@
+## 0.2.0+10
+
+- StringExtensions: added removeFromLast(int length)
+
 ## 0.2.0+9
 
 - StringExtensions: added inputFormat and outputFormat params in formatDate()

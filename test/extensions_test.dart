@@ -147,6 +147,17 @@ void main() {
       testStr = 'aabb';
       expect(testStr.ellipsis(maxLength: 15), 'aabb');
     });
+
+    test('removeFromLast', () {
+      String? testStr;
+      expect(testStr.removeFromLast(10), null);
+      testStr = 'abcde';
+      expect(testStr.removeFromLast(5), '');
+      expect(testStr.removeFromLast(10), '');
+      testStr = '07/09/2021 01:41:05 +00:00';
+      expect(testStr.removeFromLast(7), '07/09/2021 01:41:05');
+      expect(testStr.removeFromLast(100), '');
+    });
   });
 
   group('map_extensions', () {
