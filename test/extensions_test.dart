@@ -35,11 +35,18 @@ void main() {
       String? testStr;
       expect(testStr.formatDate(), null);
       testStr = '2012-01-01';
-      expect(testStr.formatDate(fmt: 'dd MMM yy', strict: false), '01 Jan 12');
+      expect(testStr.formatDate(outputFormat: 'dd MMM yy'), '01 Jan 12');
       testStr = '2012-02-27 13:27:00';
-      expect(testStr.formatDate(strict: false), '2012-02-27');
+      expect(
+          testStr.formatDate(inputFormat: 'yyyy-MM-dd HH:mm:ss'), '2012-02-27');
+      testStr = '07/09/2021 01:41:05';
+      expect(
+          testStr.formatDate(inputFormat: 'dd/MM/yyyy HH:mm:ss'), '2021-09-07');
+      testStr = '07/09/2021 01:41:05 ';
+      expect(testStr.formatDate(inputFormat: 'dd/MM/yyyy HH:mm:ss '),
+          '2021-09-07');
       testStr = '2020-02-22';
-      expect(testStr.formatDate(fmt: 'dd MMM yy', strict: false), '22 Feb 20');
+      expect(testStr.formatDate(outputFormat: 'dd MMM yy'), '22 Feb 20');
     });
 
     test('isValidDate', () {

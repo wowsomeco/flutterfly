@@ -43,26 +43,26 @@ extension StringExtensions on String? {
     return DateTime.tryParse(this!);
   }
 
-  /// Refer to [this](https://api.flutter.dev/flutter/dart-core/DateTime/parse.html) for the accepted [fmt]
-  /// for looser parsing, set [strict] to false
-  String? formatDate({String fmt = 'yyyy-MM-dd', bool strict = true}) {
+  /// Refer to [this](https://api.flutter.dev/flutter/dart-core/DateTime/parse.html) for the accepted [outputFormat]
+  String? formatDate(
+      {String outputFormat = 'yyyy-MM-dd', String inputFormat = 'yyyy-MM-dd'}) {
     if (this == null) return null;
 
     try {
-      if (strict) {
-        DateTime parsed = DateFormat(fmt).parseStrict(this!);
-        return DateFormat(fmt).format(parsed);
-      } else {
-        DateTime? parsed = DateTime.tryParse(this!);
-        return parsed != null ? DateFormat(fmt).format(parsed) : null;
-      }
+      DateFormat input = DateFormat(inputFormat);
+      DateTime? parsedInput = input.parseLoose(this!);
+
+      DateFormat output = DateFormat(outputFormat);
+      String parsedOutput = output.format(parsedInput);
+
+      return parsedOutput;
     } on FormatException catch (_) {
       return null;
     }
   }
 
   bool isValidDate({String fmt = 'yyyy-MM-dd'}) =>
-      this.formatDate(fmt: fmt) != null;
+      this.formatDate(inputFormat: fmt) != null;
 
   bool containsAny(String source) {
     if (this == null) return false;

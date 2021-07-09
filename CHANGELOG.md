@@ -1,3 +1,7 @@
+## 0.2.0+9
+
+- StringExtensions: added inputFormat and outputFormat params in formatDate()
+
 ## 0.2.0+8
 
 - StringExtensions: added ellipsis({int maxLength = 20, String replaceWith = '...'})
