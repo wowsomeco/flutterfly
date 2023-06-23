@@ -1,3 +1,7 @@
+## 0.2.1
+
+- Update intl to latest version 0.18.0
+
 ## 0.2.0+10
 
 - StringExtensions: added removeFromLast(int length)

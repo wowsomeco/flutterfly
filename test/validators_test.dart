@@ -1,7 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutterfly/flutterfly.dart';
-import 'package:flutterfly/src/common/validators/validator_number.dart';
-import 'package:flutterfly/src/common/validators/validator_string.dart';
 
 void main() {
   group('validators', () {
